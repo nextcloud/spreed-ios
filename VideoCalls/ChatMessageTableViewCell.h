@@ -33,6 +33,7 @@ static NSString *AutoCompletionCellIdentifier   = @"AutoCompletionCellIdentifier
 - (void)setGuestAvatar:(NSString *)displayName;
 - (void)setBotAvatar;
 - (void)setChangelogAvatar;
+- (void)setNotesAvatar;
 - (void)setDeliveryState:(ChatMessageDeliveryState)state;
 - (void)setUserStatus:(NSString *)userStatus;
 

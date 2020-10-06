@@ -355,6 +355,9 @@ typedef enum NCChatMessageAction {
         case kNCRoomTypeChangelog:
             [_titleView.image setImage:[UIImage imageNamed:@"changelog"]];
             break;
+        case kNCRoomTypeNotes:
+            [_titleView.image setImage:[UIImage imageNamed:@"notes"]];
+            break;
         default:
             break;
     }
@@ -1754,6 +1757,8 @@ typedef enum NCChatMessageAction {
         } else if ([message.actorType isEqualToString:@"bots"]) {
             if ([message.actorId isEqualToString:@"changelog"]) {
                 [normalCell setChangelogAvatar];
+            } else if ([message.actorId isEqualToString:@"notes"]) {
+                [normalCell setNotesAvatar];
             } else {
                 [normalCell setBotAvatar];
             }
@@ -1801,6 +1806,8 @@ typedef enum NCChatMessageAction {
         } else if ([message.actorType isEqualToString:@"bots"]) {
             if ([message.actorId isEqualToString:@"changelog"]) {
                 [normalCell setChangelogAvatar];
+            } else if ([message.actorId isEqualToString:@"notes"]) {
+                [normalCell setNotesAvatar];
             } else {
                 [normalCell setBotAvatar];
             }

@@ -16,7 +16,8 @@ typedef enum NCRoomType {
     kNCRoomTypeOneToOne = 1,
     kNCRoomTypeGroup,
     kNCRoomTypePublic,
-    kNCRoomTypeChangelog
+    kNCRoomTypeChangelog,
+    kNCRoomTypeNotes
 } NCRoomType;
 
 typedef enum NCRoomNotificationLevel {
@@ -79,6 +80,7 @@ extern NSString * const NCRoomObjectTypeSharePassword;
 - (BOOL)canModerate;
 - (BOOL)isNameEditable;
 - (BOOL)isLeavable;
+- (BOOL)isMyNotes;
 - (BOOL)userCanStartCall;
 - (NSString *)deletionMessage;
 - (NSString *)notificationLevelString;
