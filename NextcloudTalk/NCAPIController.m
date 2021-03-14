@@ -1108,6 +1108,23 @@ NSInteger const kReceivedChatMessagesLimit = 100;
     return avatarRequest;
 }
 
+- (void)getUserAvatarForUser:(NSString *)userId andSize:(NSInteger)size usingAccount:(TalkAccount *)account withCompletionBlock:(GetUserAvatarImageForUserCompletionBlock)block
+{
+    NSURLRequest *request = [self createAvatarRequestForUser:userId andSize:size usingAccount:account];
+    [_imageDownloader downloadImageForURLRequest:request success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull responseObject) {
+        NSData *pngData = UIImagePNGRepresentation(responseObject);
+        UIImage *image = [UIImage imageWithData:pngData];
+        
+        if (image && block) {
+            block(image, nil);
+        }
+    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        if (block) {
+            block(nil, error);
+        }
+    }];
+}
+
 #pragma mark - File previews
 
 - (NSURLRequest *)createPreviewRequestForFile:(NSString *)fileId width:(NSInteger)width height:(NSInteger)height usingAccount:(TalkAccount *)account
