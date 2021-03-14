@@ -37,6 +37,7 @@
 #import "MBProgressHUD.h"
 #import "NCNavigationController.h"
 #import "NCUserInterfaceController.h"
+#import "NCIntentController.h"
 
 
 @interface ShareConfirmationViewController () <NCCommunicationCommonDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, QLPreviewControllerDataSource, QLPreviewControllerDelegate, ShareItemControllerDelegate, TOCropViewControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate>
@@ -371,6 +372,7 @@
             NSLog(@"Failed to send shared item");
         } else {
             [self.delegate shareConfirmationViewControllerDidFinish:self];
+            [[NCIntentController sharedInstance] donateSendMessageIntentForRoom:self->_room];
         }
         [self stopAnimatingSharingIndicator];
     }];
