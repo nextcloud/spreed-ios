@@ -18,6 +18,10 @@
 		1F5CDF642584E78900B0026E /* NCChatFileStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CDF632584E78900B0026E /* NCChatFileStatus.m */; };
 		1F5CDF652584E78900B0026E /* NCChatFileStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CDF632584E78900B0026E /* NCChatFileStatus.m */; };
 		1F5CDF662584E78900B0026E /* NCChatFileStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CDF632584E78900B0026E /* NCChatFileStatus.m */; };
+		1F90EFBC25FE39F800F3FA55 /* NCIntentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F90EFBB25FE39F800F3FA55 /* NCIntentController.m */; };
+		1F90EFBD25FE39F800F3FA55 /* NCIntentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F90EFBB25FE39F800F3FA55 /* NCIntentController.m */; };
+		1F90EFBE25FE39F800F3FA55 /* NCIntentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F90EFBB25FE39F800F3FA55 /* NCIntentController.m */; };
+		1F90EFC725FE4BE700F3FA55 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F90EFC225FE489B00F3FA55 /* IntentsUI.framework */; };
 		1FEDE3C6257D439500853F79 /* NCChatFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEDE3C4257D439500853F79 /* NCChatFileController.m */; };
 		1FEDE3C7257D439500853F79 /* NCChatFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEDE3C4257D439500853F79 /* NCChatFileController.m */; };
 		1FEDE3C8257D439500853F79 /* NCChatFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEDE3C4257D439500853F79 /* NCChatFileController.m */; };
@@ -435,6 +439,9 @@
 		1F4DD3EA2571C688007DC98E /* EmojiUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUtils.swift; sourceTree = "<group>"; };
 		1F5CDF622584E78900B0026E /* NCChatFileStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCChatFileStatus.h; sourceTree = "<group>"; };
 		1F5CDF632584E78900B0026E /* NCChatFileStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCChatFileStatus.m; sourceTree = "<group>"; };
+		1F90EFBA25FE39F800F3FA55 /* NCIntentController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCIntentController.h; sourceTree = "<group>"; };
+		1F90EFBB25FE39F800F3FA55 /* NCIntentController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCIntentController.m; sourceTree = "<group>"; };
+		1F90EFC225FE489B00F3FA55 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		1FEDE3C4257D439500853F79 /* NCChatFileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCChatFileController.m; sourceTree = "<group>"; };
 		1FEDE3C5257D439500853F79 /* NCChatFileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCChatFileController.h; sourceTree = "<group>"; };
 		1FEDE3CC257D43AB00853F79 /* NCMessageFileParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCMessageFileParameter.m; sourceTree = "<group>"; };
@@ -825,6 +832,7 @@
 				2CB5D0531FB4D1FD00D7A5B7 /* libssl.a in Frameworks */,
 				2CA0C8EB24D1D3BF005702AC /* NCCommunication.framework in Frameworks */,
 				2CA1CCCA1F17C503002FE6A2 /* AudioToolbox.framework in Frameworks */,
+				1F90EFC725FE4BE700F3FA55 /* IntentsUI.framework in Frameworks */,
 				2CA1CC971F016117002FE6A2 /* Security.framework in Frameworks */,
 				2C90E5CF1EDF23A00093D85A /* WebKit.framework in Frameworks */,
 				2C90E5691EDDE13A0093D85A /* UIKit.framework in Frameworks */,
@@ -857,6 +865,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F90EFB925FE398B00F3FA55 /* Siri */ = {
+			isa = PBXGroup;
+			children = (
+				1F90EFBA25FE39F800F3FA55 /* NCIntentController.h */,
+				1F90EFBB25FE39F800F3FA55 /* NCIntentController.m */,
+			);
+			name = Siri;
+			sourceTree = "<group>";
+		};
 		2C0574741EDD9E8E00D9E7F2 = {
 			isa = PBXGroup;
 			children = (
@@ -896,6 +913,7 @@
 				2C5521661F7D47A50077E587 /* Rooms */,
 				2CBF82B31FCC7DC100636459 /* Security */,
 				2C55216A1F7D48850077E587 /* Settings */,
+				1F90EFB925FE398B00F3FA55 /* Siri */,
 				2C0574801EDD9E8E00D9E7F2 /* Supporting Files */,
 				2C0633102046CCA60043481A /* User Interface */,
 				2C78EF961F7E720A008AFA74 /* WebRTC */,
@@ -1334,6 +1352,7 @@
 		2C90E5621EDDE0FB0093D85A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F90EFC225FE489B00F3FA55 /* IntentsUI.framework */,
 				2CA0C8EA24D1D3BF005702AC /* NCCommunication.framework */,
 				2CA1CCC91F17C503002FE6A2 /* AudioToolbox.framework */,
 				2CA1CC961F016117002FE6A2 /* Security.framework */,
@@ -1894,6 +1913,7 @@
 				2C9B0B9C217F756B00A4752C /* NCNotification.m in Sources */,
 				2CC007BD20D8F24B0096D91F /* RoomCreation2TableViewController.m in Sources */,
 				2CBF82BD1FD5AE0A00636459 /* NCImageSessionManager.m in Sources */,
+				1F90EFBC25FE39F800F3FA55 /* NCIntentController.m in Sources */,
 				2C1ABD9925769F7500AEDFB6 /* ShareItem.m in Sources */,
 				2C2E64251F3462AF00D39CE8 /* NCSignalingMessage.m in Sources */,
 				2CA1554B208F2E5700CE8EF0 /* NCMessageTextView.m in Sources */,
@@ -2057,6 +2077,7 @@
 				2C1ABDD0257E939600AEDFB6 /* NCContact.m in Sources */,
 				2C1ABDC8257A7CF100AEDFB6 /* NCContactsManager.m in Sources */,
 				2C62B00524C1BDB9007E460A /* AuthenticationViewController.m in Sources */,
+				1F90EFBE25FE39F800F3FA55 /* NCIntentController.m in Sources */,
 				2C62B00124C1BDAA007E460A /* AddParticipantsTableViewController.m in Sources */,
 				2C62B00A24C1BDBD007E460A /* NCImageSessionManager.m in Sources */,
 				2C62AFC624C1BD74007E460A /* UIView+SLKAdditions.m in Sources */,
@@ -2157,6 +2178,7 @@
 				2CC001A424A37A8B00A20167 /* NBMPeersFlowLayout.m in Sources */,
 				2CC0017C24A37A4B00A20167 /* SLKTextView+SLKAdditions.m in Sources */,
 				2CC001C224A37AC500A20167 /* NCPushNotification.m in Sources */,
+				1F90EFBD25FE39F800F3FA55 /* NCIntentController.m in Sources */,
 				2CC0016524A25B8900A20167 /* NCUserInterfaceController.m in Sources */,
 				2CC001A024A37A8100A20167 /* RTCIceCandidate+JSON.m in Sources */,
 				2CC001E624A37ADF00A20167 /* NCPeerConnection.m in Sources */,

@@ -23,6 +23,7 @@
 #import "ShareViewController.h"
 
 #import <NCCommunication/NCCommunication.h>
+#import <Intents/Intents.h>
 
 #import "NCAPIController.h"
 #import "NCAppBranding.h"
@@ -35,6 +36,7 @@
 #import "ShareConfirmationViewController.h"
 #import "ShareTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "NCIntentController.h"
 
 @interface ShareViewController () <UISearchControllerDelegate, UISearchResultsUpdating, ShareConfirmationViewControllerDelegate>
 {
@@ -102,16 +104,42 @@
     };
     NSError *error = nil;
     RLMRealm *realm = [RLMRealm realmWithConfiguration:configuration error:&error];
+    
+    if (@available(iOS 13.0, *)) {
+        if (self.extensionContext && self.extensionContext.intent && [self.extensionContext.intent isKindOfClass:[INSendMessageIntent class]]) {
+            INSendMessageIntent *intent = (INSendMessageIntent *)self.extensionContext.intent;
+            
+            NSPredicate *query = [NSPredicate predicateWithFormat:@"internalId = %@", intent.conversationIdentifier];
+            NCRoom *managedRoom = [NCRoom objectsInRealm:realm withPredicate:query].firstObject;
+            
+            if (managedRoom) {
+                NCRoom *room = [[NCRoom alloc] initWithValue:managedRoom];
+                NSPredicate *query = [NSPredicate predicateWithFormat:@"accountId = %@", room.accountId];
+                TalkAccount *managedAccount = [TalkAccount objectsInRealm:realm withPredicate:query].firstObject;
+                
+                if (managedAccount) {
+                    _activeAccount = [[TalkAccount alloc] initWithValue:managedAccount];
+                    _serverCapabilities = [self getServerCapabilitesForAccount:_activeAccount withRealm:realm];
+                    
+                    ShareConfirmationViewController *shareConfirmationVC = [[ShareConfirmationViewController alloc] initWithRoom:room account:_activeAccount serverCapabilities:_serverCapabilities];
+                    shareConfirmationVC.delegate = self;
+                    shareConfirmationVC.isModal = YES;
+                    [self setSharedItemToShareConfirmationViewController:shareConfirmationVC];
+                    [self.navigationController pushViewController:shareConfirmationVC animated:YES];
+                    
+                    return;
+                }
+            }
+        }
+    }
+    
     TalkAccount *managedActiveAccount = [TalkAccount objectsInRealm:realm where:(@"active = true")].firstObject;
+    
     if (managedActiveAccount) {
         _activeAccount = [[TalkAccount alloc] initWithValue:managedActiveAccount];
         NSArray *accountRooms = [[NCRoomsManager sharedInstance] roomsForAccountId:_activeAccount.accountId witRealm:realm];
         _rooms = [[NSMutableArray alloc] initWithArray:accountRooms];
-        NSPredicate *query = [NSPredicate predicateWithFormat:@"accountId = %@", _activeAccount.accountId];
-        ServerCapabilities *managedServerCapabilities = [ServerCapabilities objectsInRealm:realm withPredicate:query].firstObject;
-        if (managedServerCapabilities) {
-            _serverCapabilities = [[ServerCapabilities alloc] initWithValue:managedServerCapabilities];
-        }
+        _serverCapabilities = [self getServerCapabilitesForAccount:_activeAccount withRealm:realm];
     }
     
     // Configure table views
@@ -212,6 +240,17 @@
     
     // Fix uisearchcontroller animation
     self.extendedLayoutIncludesOpaqueBars = YES;
+}
+
+- (ServerCapabilities *)getServerCapabilitesForAccount:(TalkAccount *)account withRealm:(RLMRealm *)realm;
+{
+    NSPredicate *query = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
+    ServerCapabilities *managedServerCapabilities = [ServerCapabilities objectsInRealm:realm withPredicate:query].firstObject;
+    if (managedServerCapabilities) {
+        return [[ServerCapabilities alloc] initWithValue:managedServerCapabilities];
+    }
+    
+    return nil;
 }
 
 #pragma mark - Navigation buttons

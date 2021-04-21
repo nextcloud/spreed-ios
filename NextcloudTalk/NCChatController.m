@@ -26,6 +26,7 @@
 #import "NCDatabaseManager.h"
 #import "NCRoomsManager.h"
 #import "NCSettingsController.h"
+#import "NCIntentController.h"
 
 NSString * const NCChatControllerDidReceiveInitialChatHistoryNotification           = @"NCChatControllerDidReceiveInitialChatHistoryNotification";
 NSString * const NCChatControllerDidReceiveInitialChatHistoryOfflineNotification    = @"NCChatControllerDidReceiveInitialChatHistoryOfflineNotification";
@@ -565,7 +566,10 @@ NSString * const NCChatControllerDidReceiveDeletedMessageNotification           
                 [self setSendingFailedToMessageWithReferenceId:referenceId];
             }
             NSLog(@"Could not send chat message. Error: %@", error.description);
+        } else {
+            [[NCIntentController sharedInstance] donateSendMessageIntentForRoom:self->_room];
         }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:NCChatControllerDidSendChatMessageNotification
                                                             object:self
                                                           userInfo:userInfo];
